@@ -39,6 +39,34 @@
   \textup{2020} Mathematics Subject Classification}%
 }
 
+% stolen from amsart.cls
+\let\@concepts\@empty
+\newcounter{@concepts}
+\newcommand\ccsdesc[2][100]{%
+  \ccsdesc@parse#1~#2~~\ccsdesc@parse@end}
+\def\textrightarrow{$\rightarrow$}
+\def\ccsdesc@parse#1~#2~#3~{%
+  \stepcounter{@concepts}%
+  \expandafter\ifx\csname CCS@General@#2\endcsname\relax
+  \expandafter\gdef\csname CCS@General@#2\endcsname{
+    \textrm{#2}}%
+  \expandafter\gdef\csname CCS@Punctuation@#2\endcsname{; }%
+  \expandafter\gdef\csname CCS@Specific@#2\endcsname{}%
+  \g@addto@macro{\@concepts}{\csname CCS@General@#2\endcsname
+    \csname CCS@Punctuation@#2\endcsname
+    \csname CCS@Specific@#2\endcsname}%
+  \fi
+  \ifx#3\relax\relax\else
+  \expandafter\gdef\csname CCS@Punctuation@#2\endcsname{
+    \textrightarrow\ }%
+  \expandafter\g@addto@macro\expandafter{\csname CCS@Specific@#2\endcsname}{%
+    \addtocounter{@concepts}{-1}%
+    \textit{#3}%
+    \ifnum\value{@concepts}=0.\else; \fi}%
+  \fi
+  \ccsdesc@parse@finish}
+\def\ccsdesc@parse@finish#1\ccsdesc@parse@end{}
+
 \def\@maketitle{
 \thispagestyle{empty}
 
@@ -120,6 +148,10 @@
 \calclayout
 \begin{center}
   \ifx\@empty\@subjclass\else\@setsubjclass\fi
+  \ifx\@concepts\@empty\else\bgroup
+  {\textit{CCS Concepts}.%
+    \noindent\@concepts\par}\egroup
+  \fi
   \ifx\@empty\@keywords\else\@setkeywords\fi
 \end{center}
 \vfil
