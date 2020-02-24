@@ -2,7 +2,7 @@
 %starting all chapters on odd numbered pages
 \documentclass[12pt]{cmuthesis}
 
-% This is a template for a CMU thesis.  It is 18 pages without any content :-)
+% This is a template for a CMU thesis.  It is 16 pages without any content :-)
 % The source for this is pulled from a variety of sources and people.
 % Here's a partial list of people who may or may have not contributed:
 %
@@ -10,6 +10,7 @@
 %        caruana  = Rich Caruana
 %        colohan  = Chris Colohan
 %        comar    = Cyrus Omar
+%        dkoes    = David Koes
 %        jab      = Justin Boyan
 %        josullvn = Joseph O'Sullivan
 %        jrs      = Jonathan Shewchuk
@@ -17,15 +18,14 @@
 %        mjz      = Matt Zekauskas (mattz@cs)
 %        pdinda   = Peter Dinda
 %        pfr      = Patrick Riley
-%        dkoes = David Koes (me)
+%        rak      = Ryan Kavanagh
 
-% My main contribution is putting everything into a single class files and small
-% template since I prefer this to some complicated sprawling directory tree with
-% makefiles.
+% dkoes: My main contribution is putting everything into a single class files and small template since I prefer this to some complicated sprawling directory tree with makefiles.
+
+% rak: I ported it to use the "amsbook" class instead of the plain "book" class.
 
 % some useful packages
 \usepackage{times}
-\usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage[numbers,sort]{natbib}
@@ -37,16 +37,14 @@
 % Approximately 1" margins, more space on binding side
 %\usepackage[letterpaper,twoside,vscale=.8,hscale=.75,nomarginpar]{geometry}
 %for general printing (not binding)
-\usepackage[letterpaper,twoside,vscale=.8,hscale=.75,nomarginpar,hmarginratio=1:1]{geometry}
+\PassOptionsToPackage{twoside}{geometry}
+\PassOptionsToPackage{vscale=.8}{geometry}
+\PassOptionsToPackage{hscale=.8}{geometry}
+\PassOptionsToPackage{nomarginpar}{geometry}
+\PassOptionsToPackage{hmarginratio=1:1}{geometry}
 
 % Provides a draft mark at the top of the document. 
 \draftstamp{\today}{DRAFT}
-
-\begin {document} 
-\frontmatter
-
-%initialize page style, so contents come out right (see bot) -mjz
-\pagestyle{empty}
 
 \title{ %% {\it \huge Thesis Proposal}\\
 {\bf Awesome Work in Computer Science}}
@@ -70,29 +68,33 @@ Someone from a strange and faraway land
 
 \keywords{Stuff, More Stuff}
 
+\begin{document}
+
+\frontmatter
+
+% The maketitle command also prints your abstract. For this reason,
+% the abstract needs to come before \maketitle.
+
+\begin{abstract}
+  A short summary.
+\end{abstract}
+
+\frontmatter
+
 \maketitle
 
 \begin{dedication}
-For my dog
+  For my dog
 \end{dedication}
 
-\pagestyle{plain} % for toc, was empty
-
-%% Obviously, it's probably a good idea to break the various sections of your thesis
-%% into different files and input them into this file...
-
-\begin{abstract}
-A short summary.
-\end{abstract}
-
 \begin{acknowledgments}
-My advisor is cool.
+  My advisor is cool.
 \end{acknowledgments}
 
-
-
 \tableofcontents
+
 \listoffigures
+
 \listoftables
 
 \mainmatter
