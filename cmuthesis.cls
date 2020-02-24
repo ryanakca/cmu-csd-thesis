@@ -32,6 +32,13 @@
 %\def\@copyrightnotice#1{{\small\sbox{\@copyrightbox}{#1}\ifthenelse{\lengthtest{\wd\@copyrightbox > \linewidth}}{\noindent #1 \par}{\begin{center} #1 \end{center}}}}
 \def\@copyrightnotice#1{{\small\sbox{\@copyrightbox}{#1}\ifdim\wd\@copyrightbox>\linewidth \noindent #1 \par\else\begin{center} #1 \end{center}\fi}}
 
+% The 2020 classification is online, but amsbook hasn't been updated
+% yet to include it.
+\@ifundefined{subjclassname@2020}{%
+  \@namedef{subjclassname@2020}{%
+  \textup{2020} Mathematics Subject Classification}%
+}
+
 \def\@maketitle{
 \thispagestyle{empty}
 
