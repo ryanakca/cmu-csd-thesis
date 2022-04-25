@@ -1,4 +1,5 @@
 %% dkoes 5/10/2006
+%% rak   2021
 
 \LoadClassWithOptions{amsbook}
 
@@ -15,9 +16,10 @@
 
 %% titlepage parameters
 %%   required: title, author, date, Year, trnumber, committee
-%%   optional: permission, support, disclaimer, keywords
+%%   optional: permission, support, disclaimer, keywords, subtitle
 
 \def\title#1{\gdef\@title{#1}}
+\def\subtitle#1{\gdef\@subtitle{#1}}
 \def\author#1{\gdef\@author{#1}}
 \def\date#1{\gdef\@date{#1}}
 \def\Year#1{\gdef\@Year{#1}}
@@ -92,6 +94,7 @@
 \vfill
 \begin{center}
 {\Large \strut \@title\par}
+\@ifundefined{@subtitle}{}{\large \strut \@subtitle\par}
 \vfill
 {\large \begin{tabular}[t]{c}\@author\end{tabular}\par}
 \vfill
@@ -106,6 +109,7 @@
 \vskip 3em
 
 \begin{center}
+    Computer Science Department\\
     School of Computer Science \\
     Carnegie Mellon University \\
     Pittsburgh, PA 15213
@@ -127,13 +131,14 @@
 
 \@ifundefined{@permission}{\@copyrightnotice{Copyright \copyright\ \@Year\ \@author}}{\@copyrightnotice{Copyright \copyright\ \@Year\ \@author. \@permission}}
 
-\@ifundefined{@support}{}{{\medskip\footnotesize\noindent\@support\par}}
+\@ifundefined{@support}{}{{\medskip\footnotesize\begin{center}\noindent\parbox{5in}{\@support}\end{center}\par}}
 
-\@ifundefined{@disclaimer}{}{{\medskip\footnotesize\noindent\@disclaimer\par}}
+\@ifundefined{@disclaimer}{}{{\medskip\footnotesize\begin{center}\noindent\parbox{5in}{\@disclaimer}\end{center}\par}}
 
 % keywords go at bottom of page ii (the rear of the titlepage)
 % if keywords are omitted, this page is blank
 
+% abstract goes at top of page iii
 
 % amsbook default textwidth / textheight is 30pc / 50.5pc (p. 10
 % of amsclass manual). To save Catherine paper (and to allow us
@@ -146,6 +151,7 @@
 \restoregeometry\thispagestyle{empty}
 %\newgeometry{textwidth=32pc,textheight=53.9pc}\thispagestyle{empty}
 \calclayout
+\vspace*{\fill}
 \begin{center}
   \ifx\@empty\@subjclass\else\@setsubjclass\fi
   \ifx\@concepts\@empty\else\bgroup
@@ -154,7 +160,7 @@
   \fi
   \ifx\@empty\@keywords\else\@setkeywords\fi
 \end{center}
-\vfil
+\clearpage
 \@setabstract
 }
 
@@ -164,21 +170,24 @@
 
 
 \newenvironment{psuedochapter}[1]
-  {\cleardoublepage
-   \thispagestyle{empty}
-   \vspace*{\stretch{1}}
-   \begin{center} \large {\bf #1} \end{center}
-%   \addcontentsline{toc}{chapter}{\numberline{}#1} --not yet mjz
-   \begin{quotation}}
+{\cleardoublepage
+  \thispagestyle{empty}
+  \vspace*{\stretch{1}}
+  \begin{center} \large {\bf #1} \end{center}
+  \vspace{\medskipamount}
+  \begin{quotation}}
   {\end{quotation}
-   \vspace*{\stretch{3}}
-   \clearpage}
+  \vspace*{\stretch{3}}
+  \clearpage}
 
- \newenvironment{acknowledgments}
- {\begin{psuedochapter}{Acknowledgments}}
-   {\end{psuedochapter}}
+\newenvironment{acknowledgments}
+{\begin{psuedochapter}{Acknowledgments}}
+  {\end{psuedochapter}}
 
 
- \setlength{\textwidth}{32pc}
- \setlength{\textheight}{53.9pc}
- \calclayout
+\setlength{\textwidth}{32pc}
+\setlength{\textheight}{53.9pc}
+\calclayout
+
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
