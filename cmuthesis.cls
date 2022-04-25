@@ -158,37 +158,6 @@
 \@setabstract
 }
 
-% A simple style file to provide a draft marking in the background of
-% a file
-% Thank you to Will Uther who provided the base code that I rolled
-% into this package
-% ChangeLog
-% 1.1: shrunk and shifted the stamp so that it avoid the unprintable
-% area at the top of the page
-% 1.2 dkoes - made it big and rotated and light
-% 1.3 dkoes - made it small, and unrotated since Jonathan Aldrich complained
-% 1.4 comar - moved it below the page number to avoid problem with synctex
-\RequirePackage{graphicx}
-\RequirePackage{eso-pic}
-\RequirePackage{color}
-
-%Got this from Will (will@cs.cmu.edu)
-%usage: \draftstamp{date}{label}
-\newcommand{\draftstamp}[2]{\definecolor{DraftGrey}{gray}{0.7}
-  \ClearShipoutPicture\AddToShipoutPicture{
-    \begin{minipage}[b][0.11\paperheight][t]{\paperwidth}
-      \centering
-      \vspace{.5in}
-      \textcolor{DraftGrey}{\renewcommand{\baselinestretch}{1.0}\normalsize
-        \begin{tabular}{c}
-          #1 \\
-          #2
-        \end{tabular}
-      }
-
-    \end{minipage}
-  }}
-
 \newenvironment{dedication}
   {\cleardoublepage \thispagestyle{empty} \vspace*{\stretch{1}} \begin{center} \em}
   {\end{center} \vspace*{\stretch{3}} \clearpage}

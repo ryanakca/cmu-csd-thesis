@@ -42,9 +42,21 @@
 \PassOptionsToPackage{hscale=.8}{geometry}
 \PassOptionsToPackage{nomarginpar}{geometry}
 \PassOptionsToPackage{hmarginratio=1:1}{geometry}
+%% If you're versioning your thesis with Git (which you really should),
+%% then the following lines will add a stamp at the bottom of each page
+%% with the build time and current commit number. Very useful for
+%% knowing which particular draft of your thesis your advisors or
+%% committee members are talking about in their comments.
+%%
+%% See "Setup and tailoring" in the documentation for instructions on
+%% how to set up the post-commit, post-merge, and post-checkout hooks
+%% that generate the Git information used by the package:
+%% http://mirrors.ctan.org/macros/latex/contrib/gitinfo2/gitinfo2.pdf
+\usepackage[hhmmss]{datetime}
+\usepackage[mark,markifdirty,markifdraft]{gitinfo2}
+\renewcommand{\gitMark}{\gitBranch\,@\,\gitDescribe{}~\textbullet{}~{\today}~\currenttime}
+%% Comment them out if you do not want the stamp.
 
-% Provides a draft mark at the top of the document.
-\draftstamp{\today}{DRAFT}
 
 \title{ %% {\it \huge Thesis Proposal}\\
   {\bf Awesome Work in Computer Science}}
