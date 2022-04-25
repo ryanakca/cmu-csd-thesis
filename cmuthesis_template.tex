@@ -1,8 +1,6 @@
-%for a more compact document, add the option openany to avoid
-%starting all chapters on odd numbered pages
 \documentclass[12pt]{cmuthesis}
 
-% This is a template for a CMU thesis.  It is 16 pages without any content :-)
+% This is a template for a CMU thesis.  It is 18 pages without any content :-)
 % The source for this is pulled from a variety of sources and people.
 % Here's a partial list of people who may or may have not contributed:
 %
@@ -22,17 +20,19 @@
 
 % dkoes: My main contribution is putting everything into a single class files and small template since I prefer this to some complicated sprawling directory tree with makefiles.
 
-% rak: I ported it to use the "amsbook" class instead of the plain "book" class.
+% rak: I ported it to use the "amsbook" class instead of the plain "book" class,
+%      incorporated formatting changes from Catherine, and added a few bells and
+%      whistles.
 
 % some useful packages
-\usepackage{times}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage[numbers,sort]{natbib}
+\usepackage{microtype} % Better typography
+\usepackage{mathpazo}  % Nice default font, see also: times, MinionPro
+\usepackage{graphicx}  % Include graphics
+\usepackage[numbers,sort]{natbib} % Also consider biblatex
 \usepackage[backref,pageanchor=true,plainpages=false, pdfpagelabels, bookmarks,bookmarksnumbered,
 %pdfborder=0 0 0,  %removes outlines around hyper links in online display
 ]{hyperref}
-\usepackage{subfigure}
+\usepackage{subfigure} % Subfigures
 
 %% If you're versioning your thesis with Git (which you really should),
 %% then the following lines will add a stamp at the bottom of each page
